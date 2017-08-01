@@ -68,3 +68,24 @@ clean_df %>%
   xlab(NULL) +
   coord_flip() + 
   facet_wrap(~wday, scales = "free")
+
+clean_df %>%
+  # filter(word != 'police') %>%
+  group_by(year) %>%
+  count(word, sort = TRUE) %>%
+  arrange(-year,-n) %>%
+  top_n(n=2, wt = n)
+
+clean_df %>%
+  # filter(word != 'police') %>%
+  group_by(month) %>%
+  count(word, sort = TRUE) %>%
+  arrange(month,-n) %>%
+  top_n(n=2, wt = n)
+
+clean_df %>%
+  # filter(word != 'police') %>%
+  group_by(wday) %>%
+  count(word, sort = TRUE) %>%
+  arrange(wday,-n) %>%
+  top_n(n=2, wt = n)
