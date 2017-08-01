@@ -41,6 +41,30 @@ clean_df %>%
   xlab(NULL) +
   coord_flip()
 
+clean_df$year = year(clean_df$publish_date)
+clean_df$month = month(clean_df$publish_date)
+clean_df$wday = factor(wday(clean_df$publish_date,label=TRUE))
+head(clean_df)
 
+clean_df %>%
+  group_by(year) %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 1500) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() + 
+  facet_wrap(~year, scales = "free")
   
 
+clean_df %>%
+  group_by(wday) %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 2500) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip() + 
+  facet_wrap(~wday, scales = "free")
