@@ -1,5 +1,7 @@
 # Starting to explore the data 
 
+# Data is from Kaggle https://www.kaggle.com/therohk/million-headlines
+
 library(data.table)
 
 raw.data = fread('abcnews-date-text.csv')
